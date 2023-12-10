@@ -554,7 +554,7 @@ class Harmony_Transformer(object):
                 if step % 100 == 0:
                     print("------ step %d: train_loss %.4f (ct %.4f, c %.4f, L2 %.4f), train_accuracy %.4f ------" % (step, train_loss, train_loss_ct, train_loss_c, train_L2, train_acc))
 
-                if step % self._save_checkpoint_every_n_steps:
+                if step % self._save_checkpoint_every_n_steps == 0:
 
                     if self._checkpoint_path is None:
                         path_to_save_model = root_dir / 'checkpoints'
