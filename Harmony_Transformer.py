@@ -7,7 +7,6 @@ from tensorflow.python.framework import ops
 from pathlib import Path
 import pickle as pkl
 
-import glob
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -599,7 +598,7 @@ class Harmony_Transformer(object):
 
         print('test the model...')
 
-        model_meta_path = glob.glob(str(model_checkpoint_path / '*.meta'))[0]
+        model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
         saver = tf.train.import_meta_graph(str(model_meta_path))
 
         with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
