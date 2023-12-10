@@ -525,6 +525,9 @@ class Harmony_Transformer(object):
             epoch = num_examples_train // self._batch_size # steps per epoch
             annealing_slope = 1.0
 
+            if early_stopping:
+                best_valid_loss = float('-inf')
+
             for step in range(self._training_steps):
 
                 if step % epoch == 0:
@@ -604,6 +607,7 @@ class Harmony_Transformer(object):
                                 self.early_stopping_counter -= 1
 
                             else:
+                                best_valid_loss = average_valid_loss
                                 self.early_stopping_counter = early_stopping_counter # reset to full value
 
                             if self.early_stopping_counter == 0:
