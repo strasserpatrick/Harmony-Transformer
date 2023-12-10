@@ -566,13 +566,72 @@ class Harmony_Transformer(object):
                     saver.save(sess, f'{path_to_save_model}/model-step-{step}-acc-{train_acc}.ckpt', global_step=step)
                     print(f"Checkpoint saved at step {step}")
 
+    def test(self, model_checkpoint_path):
+        print("load input data...")
+        x_train, TC_train, y_train, y_cc_train, y_len_train, \
+        x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
+        split_sets = self.load_data()
+        num_examples_valid = x_valid.shape[0]
+
+        print("build model...")
+
+        with tf.name_scope('placeholder'):
+            x = tf.placeholder(tf.float32, [None, self._n_steps, self._feature_size], name='encoder_inputs') # shape = [batch_size, n_steps, n_inputs]
+            y = tf.placeholder(tf.int32, [None, self._n_steps], name='chord_labels') # ground_truth, shape = [batch_size, n_steps]
+            y_cc = tf.placeholder(tf.int32, [None, self._n_steps], name='chord_change_labels') # ground_truth, shape = [batch_size, n_steps]
+            y_len = tf.placeholder(tf.int32, shape=[None], name="sequence_lengths")
+            dropout_rate = tf.placeholder(tf.float32, name='dropout_rate')
+            is_training = tf.placeholder(tf.bool, name='is_training')
+            global_step = tf.placeholder(tf.int32, name='global_step')
+            slope = tf.placeholder(tf.float32, name='slope')
+            stochastic_tensor = tf.placeholder(tf.bool, name='stochastic_tensor')
+
+        with tf.name_scope('model'):
+            encoder_inputs_embedded, chord_change_logits, chord_change_predictions = self.encoder(x, slope, dropout_rate, is_training)
+            logits, chord_predictions = self.decoder(x, encoder_inputs_embedded, chord_change_predictions, dropout_rate, is_training)
+
+        with tf.name_scope('accuracy'):
+            label_mask = tf.less(y, 24)  # where label != 24('X)' and label != 25('pad')
+            correct_predictions = tf.equal(chord_predictions, y)
+            correct_predictions_mask = tf.boolean_mask(tensor=correct_predictions, mask=label_mask)
+            accuracy = tf.reduce_mean(tf.cast(correct_predictions_mask, tf.float32))
+
+        print('test the model...')
+        saver = tf.train.Saver()
+
+        with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
+            saver.restore(sess, model_checkpoint_path)
+
+            # validation
+            valid_run_list = [chord_predictions, accuracy]
+            valid_feed_fict = {x: x_valid,
+                               y_cc: y_cc_valid,
+                               y: y_valid,
+                               y_len: y_len_valid,
+                               dropout_rate: 0.0,
+                               is_training: False,
+                               global_step: 0,
+                               slope: 1.0,
+                               stochastic_tensor: False}
+            valid_chord_predictions, valid_acc = sess.run(valid_run_list, feed_dict=valid_feed_fict)
+
+            print("------ valid_accuracy %.4f ------" % (valid_acc))
+            print(valid_chord_predictions)
+
+
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Train and save Harmony Transformer model.')
-    parser.add_argument('--checkpoint_path', type=Path, default=None, help='Path to save model checkpoints')
-    parser.add_argument('--save_checkpoint_every_n_steps', type=int, default=5000, help='Save checkpoint every n steps')
+    # parser = argparse.ArgumentParser(description='Train and save Harmony Transformer model.')
+    # parser.add_argument('--checkpoint_path', type=Path, default=None, help='Path to save model checkpoints')
+    # parser.add_argument('--save_checkpoint_every_n_steps', type=int, default=5000, help='Save checkpoint every n steps')
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
-    model = Harmony_Transformer(save_checkpoint_every_n_steps=args.save_checkpoint_every_n_steps, checkpoint_path=args.checkpoint_path)
-    model.train()
+    # model = Harmony_Transformer(save_checkpoint_every_n_steps=args.save_checkpoint_every_n_steps, checkpoint_path=args.checkpoint_path)
+    # model.train()
+
+    model = Harmony_Transformer()
+
+    model_checkpoint_path = root_dir / "checkpoints" / 'step_10000'
+    model.test(model_checkpoint_path=model_checkpoint_path)
+
