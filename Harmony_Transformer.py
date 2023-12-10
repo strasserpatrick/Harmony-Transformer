@@ -11,6 +11,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 root_dir = Path(__file__).parent
+early_stopping_counter = 5
 
 class Harmony_Transformer(object):
     def __init__(self,
@@ -49,6 +50,8 @@ class Harmony_Transformer(object):
         self._training_steps = training_steps
         self._save_checkpoint_every_n_steps = save_checkpoint_every_n_steps
         self._checkpoint_path = checkpoint_path
+
+        self. early_stopping_counter = early_stopping_counter # this is decreased by 1 if the validation loss does not decrease
 
     def _normalize(self, inputs, epsilon=1e-8, scope="ln", reuse=None):
         '''Applies layer normalization.'''
@@ -452,8 +455,9 @@ class Harmony_Transformer(object):
                x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
                split_sets
 
-    def train(self, valid=True):
+    def train(self, valid=True, early_stopping=True):
         # load input data
+        global early_stopping_counter
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
         x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
@@ -594,6 +598,17 @@ class Harmony_Transformer(object):
 
                         print("Validation results: average_loss %.4f, average_accuracy %.4f" % (
                         average_valid_loss, average_valid_acc))
+
+                        if early_stopping:
+                            if average_valid_loss < best_valid_loss:
+                                self.early_stopping_counter -= 1
+
+                            else:
+                                self.early_stopping_counter = early_stopping_counter # reset to full value
+
+                            if self.early_stopping_counter == 0:
+                                print("Early stopping at step %d" % step)
+                                break
 
                 if step % self._save_checkpoint_every_n_steps == 0:
 
