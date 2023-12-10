@@ -11,7 +11,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 root_dir = Path(__file__).parent
-early_stopping_counter = 5
+early_stopping_counter = 10
 
 class Harmony_Transformer(object):
     def __init__(self,
