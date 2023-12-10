@@ -597,10 +597,13 @@ class Harmony_Transformer(object):
             accuracy = tf.reduce_mean(tf.cast(correct_predictions_mask, tf.float32))
 
         print('test the model...')
-        saver = tf.train.Saver()
+
+        model_meta_path = glob.glob(str(model_checkpoint_path / '*.meta'))[0]
+        saver = tf.train.import_meta_graph(str(model_meta_path))
 
         with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
-            saver.restore(sess, model_checkpoint_path)
+
+            saver.restore(sess, tf.train.latest_checkpoint(str(model_checkpoint_path)))
 
             # validation
             valid_run_list = [chord_predictions, accuracy]
@@ -632,6 +635,6 @@ if __name__ == '__main__':
 
     model = Harmony_Transformer()
 
-    model_checkpoint_path = root_dir / "checkpoints" / 'step_10000'
+    model_checkpoint_path = root_dir / 'step_10000'
     model.test(model_checkpoint_path=model_checkpoint_path)
 
