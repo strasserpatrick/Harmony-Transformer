@@ -557,9 +557,9 @@ class Harmony_Transformer(object):
                 if step % self._save_checkpoint_every_n_steps == 0:
 
                     if self._checkpoint_path is None:
-                        path_to_save_model = root_dir / 'checkpoints'
+                        path_to_save_model = root_dir / 'checkpoints' / f"step_{step}"
                     else:
-                        path_to_save_model = self._checkpoint_path
+                        path_to_save_model = self._checkpoint_path / f"step_{step}"
 
                     path_to_save_model.mkdir(parents=True, exist_ok=True)
 
