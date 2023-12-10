@@ -554,18 +554,6 @@ class Harmony_Transformer(object):
                 if step % 100 == 0:
                     print("------ step %d: train_loss %.4f (ct %.4f, c %.4f, L2 %.4f), train_accuracy %.4f ------" % (step, train_loss, train_loss_ct, train_loss_c, train_L2, train_acc))
 
-                if step % self._save_checkpoint_every_n_steps == 0:
-
-                    if self._checkpoint_path is None:
-                        path_to_save_model = root_dir / 'checkpoints' / f"step_{step}"
-                    else:
-                        path_to_save_model = self._checkpoint_path / f"step_{step}"
-
-                    path_to_save_model.mkdir(parents=True, exist_ok=True)
-
-                    saver.save(sess, f'{path_to_save_model}/model-step-{step}-acc-{train_acc}.ckpt', global_step=step)
-                    print(f"Checkpoint saved at step {step}")
-
                     if valid:
                         print("------ validation ------")
                         num_examples_valid = x_valid.shape[0]
@@ -606,6 +594,18 @@ class Harmony_Transformer(object):
 
                         print("Validation results: average_loss %.4f, average_accuracy %.4f" % (
                         average_valid_loss, average_valid_acc))
+
+                if step % self._save_checkpoint_every_n_steps == 0:
+
+                    if self._checkpoint_path is None:
+                        path_to_save_model = root_dir / 'checkpoints' / f"step_{step}"
+                    else:
+                        path_to_save_model = self._checkpoint_path / f"step_{step}"
+
+                    path_to_save_model.mkdir(parents=True, exist_ok=True)
+
+                    saver.save(sess, f'{path_to_save_model}/model-step-{step}-acc-{train_acc}.ckpt', global_step=step)
+                    print(f"Checkpoint saved at step {step}")
 
 
 # TODO: refactor to test / inference method
