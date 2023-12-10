@@ -452,7 +452,7 @@ class Harmony_Transformer(object):
                x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
                split_sets
 
-    def train(self):
+    def train(self, valid=True):
         # load input data
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
@@ -566,7 +566,11 @@ class Harmony_Transformer(object):
                     saver.save(sess, f'{path_to_save_model}/model-step-{step}-acc-{train_acc}.ckpt', global_step=step)
                     print(f"Checkpoint saved at step {step}")
 
-    def test(self, model_checkpoint_path):
+                    if valid:
+                        print("------ validation ------")
+                        self.valid(model_checkpoint_path=path_to_save_model)
+
+    def valid(self, model_checkpoint_path):
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
         x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
@@ -620,23 +624,15 @@ class Harmony_Transformer(object):
             valid_chord_predictions, true_chord_predictions, valid_acc = sess.run(valid_run_list, feed_dict=valid_feed_fict)
 
             print("------ valid_accuracy %.4f ------" % (valid_acc))
-            print("Chord predictions: ", valid_chord_predictions)
-            print("True chord predictions: ", true_chord_predictions)
 
 
 if __name__ == '__main__':
 
-    # parser = argparse.ArgumentParser(description='Train and save Harmony Transformer model.')
-    # parser.add_argument('--checkpoint_path', type=Path, default=None, help='Path to save model checkpoints')
-    # parser.add_argument('--save_checkpoint_every_n_steps', type=int, default=5000, help='Save checkpoint every n steps')
+    parser = argparse.ArgumentParser(description='Train and save Harmony Transformer model.')
+    parser.add_argument('--checkpoint_path', type=Path, default=None, help='Path to save model checkpoints')
+    parser.add_argument('--save_checkpoint_every_n_steps', type=int, default=5000, help='Save checkpoint every n steps')
 
-    # args = parser.parse_args()
+    args = parser.parse_args()
 
-    # model = Harmony_Transformer(save_checkpoint_every_n_steps=args.save_checkpoint_every_n_steps, checkpoint_path=args.checkpoint_path)
-    # model.train()
-
-    model = Harmony_Transformer()
-
-    model_checkpoint_path = root_dir / 'checkpoint_step_10000'
-    model.test(model_checkpoint_path=model_checkpoint_path)
-
+    model = Harmony_Transformer(save_checkpoint_every_n_steps=args.save_checkpoint_every_n_steps, checkpoint_path=args.checkpoint_path)
+    model.train()
