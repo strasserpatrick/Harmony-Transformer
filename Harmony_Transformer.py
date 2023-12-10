@@ -571,7 +571,6 @@ class Harmony_Transformer(object):
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
         x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
         split_sets = self.load_data()
-        num_examples_valid = x_valid.shape[0]
 
         print("build model...")
 
@@ -608,7 +607,7 @@ class Harmony_Transformer(object):
             print("model restored from checkpoint")
 
             # validation
-            valid_run_list = [chord_predictions, accuracy]
+            valid_run_list = [chord_predictions, y, accuracy]
             valid_feed_fict = {x: x_valid,
                                y_cc: y_cc_valid,
                                y: y_valid,
@@ -618,10 +617,11 @@ class Harmony_Transformer(object):
                                global_step: 0,
                                slope: 1.0,
                                stochastic_tensor: False}
-            valid_chord_predictions, valid_acc = sess.run(valid_run_list, feed_dict=valid_feed_fict)
+            valid_chord_predictions, true_chord_predictions, valid_acc = sess.run(valid_run_list, feed_dict=valid_feed_fict)
 
             print("------ valid_accuracy %.4f ------" % (valid_acc))
-            print(valid_chord_predictions)
+            print("Chord predictions: ", valid_chord_predictions)
+            print("True chord predictions: ", true_chord_predictions)
 
 
 if __name__ == '__main__':
