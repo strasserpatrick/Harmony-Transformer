@@ -598,10 +598,6 @@ class Harmony_Transformer(object):
 
         print('test the model...')
 
-        print(f"loading checkpoint from {model_checkpoint_path}")
-
-        print(list(model_checkpoint_path.glob("*")))
-
         model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
         saver = tf.train.import_meta_graph(str(model_meta_path))
 
@@ -639,6 +635,6 @@ if __name__ == '__main__':
 
     model = Harmony_Transformer()
 
-    model_checkpoint_path = root_dir / 'step_10000'
+    model_checkpoint_path = root_dir / 'checkpoint_step_10000'
     model.test(model_checkpoint_path=model_checkpoint_path)
 
