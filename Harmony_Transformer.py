@@ -608,6 +608,7 @@ class Harmony_Transformer(object):
                         average_valid_loss, average_valid_acc))
 
 
+# TODO: refactor to test / inference method
 def valid(self, model_checkpoint_path):
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
