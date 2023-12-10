@@ -568,9 +568,47 @@ class Harmony_Transformer(object):
 
                     if valid:
                         print("------ validation ------")
-                        self.valid(model_checkpoint_path=path_to_save_model)
+                        num_examples_valid = x_valid.shape[0]
+                        valid_loss_sum = 0.0
+                        valid_acc_sum = 0.0
+                        valid_batches = num_examples_valid // self._batch_size
 
-    def valid(self, model_checkpoint_path):
+                        for valid_step in range(valid_batches):
+                            valid_batch = (
+                                x_valid[valid_step * self._batch_size:(valid_step + 1) * self._batch_size],
+                                y_cc_valid[valid_step * self._batch_size:(valid_step + 1) * self._batch_size],
+                                y_valid[valid_step * self._batch_size:(valid_step + 1) * self._batch_size],
+                                y_len_valid[valid_step * self._batch_size:(valid_step + 1) * self._batch_size],
+                                TC_valid[valid_step * self._batch_size:(valid_step + 1) * self._batch_size]
+                            )
+
+                            valid_feed_dict = {
+                                x: valid_batch[0],
+                                y_cc: valid_batch[1],
+                                y: valid_batch[2],
+                                y_len: valid_batch[3],
+                                dropout_rate: 0.0,  # No dropout during validation
+                                is_training: False,
+                                slope: 1.0,
+                                stochastic_tensor: False
+                            }
+
+                            valid_loss, valid_cc_pred, valid_c_pred, valid_acc = sess.run(
+                                [loss, chord_change_predictions, chord_predictions, accuracy],
+                                feed_dict=valid_feed_dict
+                            )
+
+                            valid_loss_sum += valid_loss
+                            valid_acc_sum += valid_acc
+
+                        average_valid_loss = valid_loss_sum / valid_batches
+                        average_valid_acc = valid_acc_sum / valid_batches
+
+                        print("Validation results: average_loss %.4f, average_accuracy %.4f" % (
+                        average_valid_loss, average_valid_acc))
+
+
+def valid(self, model_checkpoint_path):
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
         x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
