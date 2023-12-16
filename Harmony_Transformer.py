@@ -5,13 +5,11 @@ import tensorflow as tf # version 1.11
 from tensorflow.python.framework import ops
 
 from pathlib import Path
-import pickle as pkl
 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 root_dir = Path(__file__).parent
-early_stopping_counter = 10
 
 class Harmony_Transformer(object):
     def __init__(self,
@@ -30,7 +28,8 @@ class Harmony_Transformer(object):
                  lambda_L2=2e-4,
                  training_steps=100000,
                  save_checkpoint_every_n_steps=5000,
-                 checkpoint_path: Path = None):
+                 checkpoint_path: Path = None,
+                 early_stopping_counter = 15):
         self._frequency_size = frequency_size
         self._segment_width = segment_width
         self._feature_size = frequency_size * segment_width # input size (feature size)
@@ -51,7 +50,8 @@ class Harmony_Transformer(object):
         self._save_checkpoint_every_n_steps = save_checkpoint_every_n_steps
         self._checkpoint_path = checkpoint_path
 
-        self. early_stopping_counter = early_stopping_counter # this is decreased by 1 if the validation loss does not decrease
+        self.early_stopping_counter = early_stopping_counter
+        self.current_early_stopping_counter = early_stopping_counter # this is decreased by 1 if the validation loss does not decrease
 
     def _normalize(self, inputs, epsilon=1e-8, scope="ln", reuse=None):
         '''Applies layer normalization.'''
@@ -457,7 +457,6 @@ class Harmony_Transformer(object):
 
     def train(self, valid=True, early_stopping=True):
         # load input data
-        global early_stopping_counter
         print("load input data...")
         x_train, TC_train, y_train, y_cc_train, y_len_train, \
         x_valid, TC_valid, y_valid, y_cc_valid, y_len_valid, \
@@ -604,13 +603,13 @@ class Harmony_Transformer(object):
 
                         if early_stopping:
                             if average_valid_loss < best_valid_loss:
-                                self.early_stopping_counter -= 1
+                                self.current_early_stopping_counter -= 1
 
                             else:
                                 best_valid_loss = average_valid_loss
-                                self.early_stopping_counter = early_stopping_counter # reset to full value
+                                self.current_early_stopping_counter = self.early_stopping_counter # reset to full value
 
-                            if self.early_stopping_counter == 0:
+                            if self.current_early_stopping_counter == 0:
                                 print("Early stopping at step %d" % step)
                                 break
 
