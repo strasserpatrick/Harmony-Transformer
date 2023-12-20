@@ -15,8 +15,8 @@ def preprocess_data_read(
 
     for foldername in inference_data_path.iterdir():
         song_name = foldername.name
-        annotations_path = inference_data / song_name / "minmaj.csv"
-        chroma_path = inference_data / song_name / "bothchroma.csv"
+        annotations_path = inference_data_path / song_name / "minmaj.csv"
+        chroma_path = inference_data_path / song_name / "bothchroma.csv"
 
         print(f"Running Message: reading {song_name} ...")
 
