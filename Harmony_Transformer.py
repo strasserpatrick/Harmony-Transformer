@@ -1150,7 +1150,7 @@ def inference(model_checkpoint_path: Path, inference_path: Path):
     with np.load(inference_path, allow_pickle=True) as input_data:
         x_inference = input_data["x_inference"]
         y = input_data["y_inference"]
-        y_cc = input_data["y_cc"]
+        y_cc = input_data["y_cc_inference"]
 
     model.inference(
         model_checkpoint_path=model_checkpoint_path, x_inference=x_inference, y=y, y_cc=y_cc,
