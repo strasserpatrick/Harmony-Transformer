@@ -1,4 +1,5 @@
 import argparse
+import json
 import click
 import numpy as np  # version 1.14.5
 import random
@@ -1027,7 +1028,7 @@ class Harmony_Transformer(object):
                     print(f"Checkpoint saved at step {step}")
 
 
-    def inference(self, model_checkpoint_path: Path, x_inference, TC_inference, y, y_cc, y_len):
+    def inference(self, model_checkpoint_path: Path, x_inference, TC_inference, y, y_cc, y_len, out_dir: Path = root_dir):
 
         print("build model...")
 
@@ -1089,17 +1090,20 @@ class Harmony_Transformer(object):
                 inference_cc_logits,
             ) = sess.run(inference_run_list, feed_dict=inference_feed_dict)
 
-            # TODO: add ground truth
-
+            
             print("inference completed")
+            result_dict = {} 
 
-            print("chord_ground_truth", y)
-            print("chord_predictions:", inference_chord_predictions)
-            print("chord_logits:", inference_chord_logits)
-        
-            print("chord_change_ground_truth", y_cc)
-            print("chord_change_predictions:", inference_cc_predictions)
-            print("chord_change_logits:", inference_cc_logits)    
+            result_dict["chord_ground_truth"] = y
+            result_dict["chord_predictions"] = inference_chord_predictions
+            result_dict["chord_logits"] = inference_chord_logits
+            result_dict["chord_change_ground_truth"] = y_cc
+            result_dict["chord_change_predictions"] = inference_cc_predictions
+            result_dict["chord_change_logits"] = inference_cc_logits
+
+            print(f"saving inference results to {out_dir}")
+            with open("inference_results.json", "w") as f:
+                json.dump(result_dict, f)
             
 
 @click.group()
@@ -1143,12 +1147,10 @@ def train(
 def inference(model_checkpoint_path: Path, inference_path: Path):
     model = Harmony_Transformer()
 
-    # TODO: evaluate why values are not there
-
     with np.load(inference_path, allow_pickle=True) as input_data:
         x_inference = input_data["x_inference"]
         TC_inference = input_data["TC_inference"]
-        y = input_data["y"]
+        y = input_data["y_inference"]
         y_cc = input_data["y_cc"]
         y_len = input_data["y_len"]
 
