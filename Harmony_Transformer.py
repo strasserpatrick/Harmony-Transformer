@@ -1027,73 +1027,73 @@ class Harmony_Transformer(object):
                     print(f"Checkpoint saved at step {step}")
 
 
-def inference(self, model_checkpoint_path: Path, x_inference):
+    def inference(self, model_checkpoint_path: Path, x_inference):
 
-    print("build model...")
+        print("build model...")
 
-    with tf.name_scope("placeholder"):
-        x = tf.placeholder(
-            tf.float32, [None, self._n_steps, self._feature_size], name="encoder_inputs"
-        )  # shape = [batch_size, n_steps, n_inputs]
-        dropout_rate = tf.placeholder(tf.float32, name="dropout_rate")
-        is_training = tf.placeholder(tf.bool, name="is_training")
-        global_step = tf.placeholder(tf.int32, name="global_step")
-        slope = tf.placeholder(tf.float32, name="slope")
-        stochastic_tensor = tf.placeholder(tf.bool, name="stochastic_tensor")
+        with tf.name_scope("placeholder"):
+            x = tf.placeholder(
+                tf.float32, [None, self._n_steps, self._feature_size], name="encoder_inputs"
+            )  # shape = [batch_size, n_steps, n_inputs]
+            dropout_rate = tf.placeholder(tf.float32, name="dropout_rate")
+            is_training = tf.placeholder(tf.bool, name="is_training")
+            global_step = tf.placeholder(tf.int32, name="global_step")
+            slope = tf.placeholder(tf.float32, name="slope")
+            stochastic_tensor = tf.placeholder(tf.bool, name="stochastic_tensor")
 
-    with tf.name_scope("model"):
-        (
-            encoder_inputs_embedded,
-            chord_change_logits,
-            chord_change_predictions,
-        ) = self.encoder(x, slope, dropout_rate, is_training)
-        logits, chord_predictions = self.decoder(
-            x,
-            encoder_inputs_embedded,
-            chord_change_predictions,
-            dropout_rate,
-            is_training,
-        )
+        with tf.name_scope("model"):
+            (
+                encoder_inputs_embedded,
+                chord_change_logits,
+                chord_change_predictions,
+            ) = self.encoder(x, slope, dropout_rate, is_training)
+            logits, chord_predictions = self.decoder(
+                x,
+                encoder_inputs_embedded,
+                chord_change_predictions,
+                dropout_rate,
+                is_training,
+            )
 
-    print("run inference on model...")
+        print("run inference on model...")
 
-    model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
-    saver = tf.train.import_meta_graph(str(model_meta_path))
-    print("model restored from", model_checkpoint_path)
+        model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
+        saver = tf.train.import_meta_graph(str(model_meta_path))
+        print("model restored from", model_checkpoint_path)
 
-    with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
-        sess.run(tf.global_variables_initializer())
-        saver.restore(sess, tf.train.latest_checkpoint(str(model_checkpoint_path)))
-        print("model restored from checkpoint")
+        with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
+            sess.run(tf.global_variables_initializer())
+            saver.restore(sess, tf.train.latest_checkpoint(str(model_checkpoint_path)))
+            print("model restored from checkpoint")
 
-        # validation
-        inference_run_list = [
-            chord_predictions,
-            logits,
-            chord_change_predictions,
-            chord_change_logits,
-        ]
-        inference_feed_dict = {
-            x: x_inference,
-            dropout_rate: 0.0,
-            is_training: False,
-            global_step: 0,
-            slope: 1.0,
-            stochastic_tensor: False,
-        }
-        (
-            inference_chord_predictions,
-            inference_chord_logits,
-            inference_cc_predictions,
-            inference_cc_logits,
-        ) = sess.run(inference_run_list, feed_dict=inference_feed_dict)
+            # validation
+            inference_run_list = [
+                chord_predictions,
+                logits,
+                chord_change_predictions,
+                chord_change_logits,
+            ]
+            inference_feed_dict = {
+                x: x_inference,
+                dropout_rate: 0.0,
+                is_training: False,
+                global_step: 0,
+                slope: 1.0,
+                stochastic_tensor: False,
+            }
+            (
+                inference_chord_predictions,
+                inference_chord_logits,
+                inference_cc_predictions,
+                inference_cc_logits,
+            ) = sess.run(inference_run_list, feed_dict=inference_feed_dict)
 
-        print("inference completed")
+            print("inference completed")
 
-        print("chord_predictions shape:", inference_chord_predictions.shape)
-        print("chord_logits shape:", inference_chord_logits.shape)
-        print("chord_change_predictions shape:", inference_cc_predictions.shape)
-        print("chord_change_logits shape:", inference_cc_logits.shape)
+            print("chord_predictions shape:", inference_chord_predictions.shape)
+            print("chord_logits shape:", inference_chord_logits.shape)
+            print("chord_change_predictions shape:", inference_cc_predictions.shape)
+            print("chord_change_logits shape:", inference_cc_logits.shape)
 
 
 @click.group()
@@ -1134,11 +1134,11 @@ def train(
 @click.option(
     "--inference_path", type=Path, help="Input data for inference"
 )
-def inference(model_checkpoint_path: Path, inference_input: np.ndarray):
+def inference(model_checkpoint_path: Path, inference_path: Path):
     model = Harmony_Transformer()
 
     # read pkl numpy array
-    with open(inference_input, "rb") as f:
+    with open(inference_path, "rb") as f:
         inference_input = np.load(f)
 
     model.inference(
