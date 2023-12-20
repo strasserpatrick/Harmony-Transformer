@@ -1094,12 +1094,12 @@ class Harmony_Transformer(object):
             print("inference completed")
             result_dict = {} 
 
-            result_dict["chord_ground_truth"] = y
-            result_dict["chord_predictions"] = inference_chord_predictions
-            result_dict["chord_logits"] = inference_chord_logits
-            result_dict["chord_change_ground_truth"] = y_cc
-            result_dict["chord_change_predictions"] = inference_cc_predictions
-            result_dict["chord_change_logits"] = inference_cc_logits
+            result_dict["chord_ground_truth"] = y.tolist()
+            result_dict["chord_predictions"] = inference_chord_predictions.tolist()
+            result_dict["chord_logits"] = inference_chord_logits.tolist()
+            result_dict["chord_change_ground_truth"] = y_cc.tolist()
+            result_dict["chord_change_predictions"] = inference_cc_predictions.tolist()
+            result_dict["chord_change_logits"] = inference_cc_logits.tolist()
 
             print(f"saving inference results to {out_dir}")
             with open("inference_results.json", "w") as f:
