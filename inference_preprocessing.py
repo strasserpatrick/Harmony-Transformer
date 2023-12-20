@@ -311,7 +311,7 @@ def preprocess_data_split(inference_data_reshape, inference_dir: Path):
     ) # [n_sequences,]
 
     
-    with open(inference_dir / "final_splited_data.pkl", "wb") as output_file:
+    with open(inference_dir / "final_split_data.pkl", "wb") as output_file:
         np.savez_compressed(
             output_file,
             x_inference=x_inference,
