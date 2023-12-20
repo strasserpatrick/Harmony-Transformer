@@ -1143,6 +1143,8 @@ def train(
 def inference(model_checkpoint_path: Path, inference_path: Path):
     model = Harmony_Transformer()
 
+    # TODO: evaluate why values are not there
+
     with np.load(inference_path, allow_pickle=True) as input_data:
         x_inference = input_data["x_inference"]
         TC_inference = input_data["TC_inference"]
