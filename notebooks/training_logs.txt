@@ -1,0 +1,537 @@
+load input data...
+build model...
+/usr/local/envs/myenv/lib/python3.6/site-packages/tensorflow/python/ops/gradients_impl.py:108: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+train the model...
+------ step 0: train_loss 8.3729 (ct 2.2451, c 3.4439, L2 2.6839), train_accuracy 0.0735 ------
+------ validation ------
+Validation results: average_loss 7.3877, average_accuracy 0.0362
+Checkpoint saved at step 0
+------ step 100: train_loss 5.0956 (ct 0.9171, c 1.6149, L2 2.5635), train_accuracy 0.4468 ------
+------ validation ------
+Validation results: average_loss 5.0440, average_accuracy 0.6168
+------ step 200: train_loss 4.8267 (ct 0.9218, c 1.4766, L2 2.4282), train_accuracy 0.5826 ------
+------ validation ------
+Validation results: average_loss 4.6819, average_accuracy 0.6949
+------ step 300: train_loss 4.4235 (ct 0.8397, c 1.2890, L2 2.2948), train_accuracy 0.6429 ------
+------ validation ------
+Validation results: average_loss 4.5942, average_accuracy 0.7051
+------ step 400: train_loss 4.4671 (ct 0.8833, c 1.4125, L2 2.1713), train_accuracy 0.6405 ------
+------ validation ------
+Validation results: average_loss 4.2904, average_accuracy 0.7175
+------ step 500: train_loss 4.1875 (ct 0.8112, c 1.3163, L2 2.0600), train_accuracy 0.6419 ------
+------ validation ------
+Validation results: average_loss 4.0829, average_accuracy 0.7268
+------ step 600: train_loss 4.1056 (ct 0.8191, c 1.3236, L2 1.9629), train_accuracy 0.6535 ------
+------ validation ------
+Validation results: average_loss 4.0089, average_accuracy 0.7223
+------ step 700: train_loss 4.0268 (ct 0.7981, c 1.3472, L2 1.8815), train_accuracy 0.6434 ------
+------ validation ------
+Validation results: average_loss 3.9157, average_accuracy 0.7271
+------ step 800: train_loss 3.9735 (ct 0.7999, c 1.3598, L2 1.8138), train_accuracy 0.6456 ------
+------ validation ------
+Validation results: average_loss 3.7383, average_accuracy 0.7369
+------ step 900: train_loss 3.8190 (ct 0.8011, c 1.2635, L2 1.7544), train_accuracy 0.6737 ------
+------ validation ------
+Validation results: average_loss 3.6402, average_accuracy 0.7492
+------ step 1000: train_loss 3.5440 (ct 0.7227, c 1.1200, L2 1.7013), train_accuracy 0.7273 ------
+------ validation ------
+Validation results: average_loss 3.6154, average_accuracy 0.7422
+------ step 1100: train_loss 3.6858 (ct 0.8042, c 1.2287, L2 1.6529), train_accuracy 0.7176 ------
+------ validation ------
+Validation results: average_loss 3.5248, average_accuracy 0.7539
+------ step 1200: train_loss 3.3997 (ct 0.7405, c 1.0490, L2 1.6102), train_accuracy 0.7523 ------
+------ validation ------
+Validation results: average_loss 3.4849, average_accuracy 0.7529
+------ step 1300: train_loss 3.5210 (ct 0.8057, c 1.1443, L2 1.5709), train_accuracy 0.7224 ------
+------ validation ------
+Validation results: average_loss 3.4039, average_accuracy 0.7599
+------ step 1400: train_loss 3.4856 (ct 0.6965, c 1.2544, L2 1.5347), train_accuracy 0.6956 ------
+------ validation ------
+Validation results: average_loss 3.3678, average_accuracy 0.7562
+------ step 1500: train_loss 3.4682 (ct 0.7921, c 1.1749, L2 1.5012), train_accuracy 0.6994 ------
+------ validation ------
+Validation results: average_loss 3.2961, average_accuracy 0.7647
+------ step 1600: train_loss 3.2082 (ct 0.6707, c 1.0670, L2 1.4705), train_accuracy 0.7513 ------
+------ validation ------
+Validation results: average_loss 3.2944, average_accuracy 0.7573
+------ step 1700: train_loss 3.3264 (ct 0.7823, c 1.1018, L2 1.4424), train_accuracy 0.7562 ------
+------ validation ------
+Validation results: average_loss 3.2213, average_accuracy 0.7662
+------ step 1800: train_loss 3.3978 (ct 0.8375, c 1.1440, L2 1.4163), train_accuracy 0.7278 ------
+------ validation ------
+Validation results: average_loss 3.2105, average_accuracy 0.7635
+------ step 1900: train_loss 3.3721 (ct 0.8319, c 1.1480, L2 1.3922), train_accuracy 0.6911 ------
+------ validation ------
+Validation results: average_loss 3.2109, average_accuracy 0.7693
+------ step 2000: train_loss 3.1500 (ct 0.6970, c 1.0832, L2 1.3698), train_accuracy 0.7746 ------
+------ validation ------
+Validation results: average_loss 3.1510, average_accuracy 0.7597
+------ step 2100: train_loss 3.1042 (ct 0.7413, c 1.0140, L2 1.3489), train_accuracy 0.7645 ------
+------ validation ------
+Validation results: average_loss 3.1262, average_accuracy 0.7618
+------ step 2200: train_loss 3.2163 (ct 0.7987, c 1.0886, L2 1.3290), train_accuracy 0.7399 ------
+------ validation ------
+Validation results: average_loss 3.0811, average_accuracy 0.7717
+------ step 2300: train_loss 3.0953 (ct 0.6951, c 1.0902, L2 1.3100), train_accuracy 0.7574 ------
+------ validation ------
+Validation results: average_loss 3.0474, average_accuracy 0.7735
+------ step 2400: train_loss 3.1467 (ct 0.7449, c 1.1091, L2 1.2927), train_accuracy 0.7496 ------
+------ validation ------
+Validation results: average_loss 3.0324, average_accuracy 0.7668
+------ step 2500: train_loss 3.1032 (ct 0.7414, c 1.0858, L2 1.2760), train_accuracy 0.7505 ------
+------ validation ------
+Validation results: average_loss 3.0327, average_accuracy 0.7753
+------ step 2600: train_loss 3.1007 (ct 0.7688, c 1.0719, L2 1.2600), train_accuracy 0.7326 ------
+------ validation ------
+Validation results: average_loss 3.0468, average_accuracy 0.7727
+------ step 2700: train_loss 3.1591 (ct 0.8364, c 1.0780, L2 1.2447), train_accuracy 0.7470 ------
+------ validation ------
+Validation results: average_loss 2.9852, average_accuracy 0.7687
+------ step 2800: train_loss 3.0504 (ct 0.7764, c 1.0435, L2 1.2305), train_accuracy 0.7488 ------
+------ validation ------
+Validation results: average_loss 2.9936, average_accuracy 0.7783
+------ step 2900: train_loss 2.9216 (ct 0.6952, c 1.0093, L2 1.2171), train_accuracy 0.7526 ------
+------ validation ------
+Validation results: average_loss 2.9761, average_accuracy 0.7720
+------ step 3000: train_loss 3.0126 (ct 0.7023, c 1.1062, L2 1.2041), train_accuracy 0.7149 ------
+------ validation ------
+Validation results: average_loss 2.9974, average_accuracy 0.7683
+------ step 3100: train_loss 3.0948 (ct 0.7191, c 1.1840, L2 1.1917), train_accuracy 0.7013 ------
+------ validation ------
+Validation results: average_loss 2.9225, average_accuracy 0.7688
+------ step 3200: train_loss 3.1487 (ct 0.7893, c 1.1799, L2 1.1796), train_accuracy 0.6895 ------
+------ validation ------
+Validation results: average_loss 2.9477, average_accuracy 0.7681
+------ step 3300: train_loss 2.9671 (ct 0.7412, c 1.0577, L2 1.1682), train_accuracy 0.7621 ------
+------ validation ------
+Validation results: average_loss 2.9165, average_accuracy 0.7746
+------ step 3400: train_loss 2.8960 (ct 0.7129, c 1.0256, L2 1.1575), train_accuracy 0.7523 ------
+------ validation ------
+Validation results: average_loss 2.8994, average_accuracy 0.7677
+------ step 3500: train_loss 2.9005 (ct 0.6616, c 1.0913, L2 1.1475), train_accuracy 0.7624 ------
+------ validation ------
+Validation results: average_loss 2.9162, average_accuracy 0.7698
+------ step 3600: train_loss 2.7867 (ct 0.7060, c 0.9425, L2 1.1382), train_accuracy 0.7960 ------
+------ validation ------
+Validation results: average_loss 2.8900, average_accuracy 0.7710
+------ step 3700: train_loss 2.8105 (ct 0.6804, c 1.0007, L2 1.1293), train_accuracy 0.7491 ------
+------ validation ------
+Validation results: average_loss 2.8393, average_accuracy 0.7758
+------ step 3800: train_loss 2.7244 (ct 0.6923, c 0.9113, L2 1.1208), train_accuracy 0.7846 ------
+------ validation ------
+Validation results: average_loss 2.8645, average_accuracy 0.7734
+------ step 3900: train_loss 2.9181 (ct 0.7527, c 1.0529, L2 1.1125), train_accuracy 0.7365 ------
+------ validation ------
+Validation results: average_loss 2.8409, average_accuracy 0.7760
+------ step 4000: train_loss 2.8796 (ct 0.6652, c 1.1100, L2 1.1043), train_accuracy 0.7473 ------
+------ validation ------
+Validation results: average_loss 2.8223, average_accuracy 0.7715
+------ step 4100: train_loss 2.8640 (ct 0.7003, c 1.0671, L2 1.0967), train_accuracy 0.7624 ------
+------ validation ------
+Validation results: average_loss 2.7927, average_accuracy 0.7761
+------ step 4200: train_loss 2.8835 (ct 0.7278, c 1.0661, L2 1.0896), train_accuracy 0.7699 ------
+------ validation ------
+Validation results: average_loss 2.8160, average_accuracy 0.7649
+------ step 4300: train_loss 2.8457 (ct 0.6686, c 1.0941, L2 1.0830), train_accuracy 0.7455 ------
+------ validation ------
+Validation results: average_loss 2.7813, average_accuracy 0.7757
+------ step 4400: train_loss 2.9881 (ct 0.7331, c 1.1782, L2 1.0768), train_accuracy 0.6918 ------
+------ validation ------
+Validation results: average_loss 2.7821, average_accuracy 0.7782
+------ step 4500: train_loss 2.8902 (ct 0.7157, c 1.1038, L2 1.0707), train_accuracy 0.7590 ------
+------ validation ------
+Validation results: average_loss 2.7693, average_accuracy 0.7739
+------ step 4600: train_loss 2.8639 (ct 0.6891, c 1.1097, L2 1.0651), train_accuracy 0.7402 ------
+------ validation ------
+Validation results: average_loss 2.7423, average_accuracy 0.7759
+------ step 4700: train_loss 2.7592 (ct 0.6717, c 1.0277, L2 1.0598), train_accuracy 0.7366 ------
+------ validation ------
+Validation results: average_loss 2.7986, average_accuracy 0.7612
+------ step 4800: train_loss 2.7388 (ct 0.6332, c 1.0508, L2 1.0547), train_accuracy 0.7657 ------
+------ validation ------
+Validation results: average_loss 2.7545, average_accuracy 0.7756
+------ step 4900: train_loss 2.8257 (ct 0.7529, c 1.0230, L2 1.0497), train_accuracy 0.7961 ------
+------ validation ------
+Validation results: average_loss 2.7458, average_accuracy 0.7758
+------ step 5000: train_loss 2.8043 (ct 0.7243, c 1.0349, L2 1.0451), train_accuracy 0.7300 ------
+------ validation ------
+Validation results: average_loss 2.7398, average_accuracy 0.7826
+Checkpoint saved at step 5000
+------ step 5100: train_loss 2.7275 (ct 0.6429, c 1.0439, L2 1.0408), train_accuracy 0.7584 ------
+------ validation ------
+Validation results: average_loss 2.7296, average_accuracy 0.7795
+------ step 5200: train_loss 2.7164 (ct 0.6437, c 1.0359, L2 1.0368), train_accuracy 0.7600 ------
+------ validation ------
+Validation results: average_loss 2.7033, average_accuracy 0.7809
+------ step 5300: train_loss 2.7624 (ct 0.6651, c 1.0643, L2 1.0331), train_accuracy 0.7454 ------
+------ validation ------
+Validation results: average_loss 2.7231, average_accuracy 0.7784
+------ step 5400: train_loss 2.8014 (ct 0.6802, c 1.0918, L2 1.0294), train_accuracy 0.7249 ------
+------ validation ------
+Validation results: average_loss 2.7038, average_accuracy 0.7773
+------ step 5500: train_loss 2.7223 (ct 0.6541, c 1.0423, L2 1.0259), train_accuracy 0.7635 ------
+------ validation ------
+Validation results: average_loss 2.7018, average_accuracy 0.7801
+------ step 5600: train_loss 2.8257 (ct 0.7534, c 1.0495, L2 1.0227), train_accuracy 0.7218 ------
+------ validation ------
+Validation results: average_loss 2.6765, average_accuracy 0.7854
+------ step 5700: train_loss 2.9571 (ct 0.7749, c 1.1625, L2 1.0198), train_accuracy 0.7342 ------
+------ validation ------
+Validation results: average_loss 2.6779, average_accuracy 0.7860
+------ step 5800: train_loss 2.7849 (ct 0.7079, c 1.0598, L2 1.0171), train_accuracy 0.7700 ------
+------ validation ------
+Validation results: average_loss 2.6946, average_accuracy 0.7774
+------ step 5900: train_loss 2.7023 (ct 0.6387, c 1.0491, L2 1.0146), train_accuracy 0.7739 ------
+------ validation ------
+Validation results: average_loss 2.6686, average_accuracy 0.7813
+------ step 6000: train_loss 2.7725 (ct 0.7242, c 1.0361, L2 1.0122), train_accuracy 0.7840 ------
+------ validation ------
+Validation results: average_loss 2.6738, average_accuracy 0.7857
+------ step 6100: train_loss 2.6746 (ct 0.6484, c 1.0162, L2 1.0100), train_accuracy 0.7469 ------
+------ validation ------
+Validation results: average_loss 2.6624, average_accuracy 0.7770
+------ step 6200: train_loss 2.7286 (ct 0.6704, c 1.0501, L2 1.0080), train_accuracy 0.7677 ------
+------ validation ------
+Validation results: average_loss 2.6696, average_accuracy 0.7826
+------ step 6300: train_loss 2.7006 (ct 0.7315, c 0.9630, L2 1.0062), train_accuracy 0.8034 ------
+------ validation ------
+Validation results: average_loss 2.6781, average_accuracy 0.7727
+------ step 6400: train_loss 2.6616 (ct 0.7099, c 0.9473, L2 1.0044), train_accuracy 0.7764 ------
+------ validation ------
+Validation results: average_loss 2.6646, average_accuracy 0.7723
+------ step 6500: train_loss 2.8973 (ct 0.6862, c 1.2083, L2 1.0028), train_accuracy 0.7118 ------
+------ validation ------
+Validation results: average_loss 2.6598, average_accuracy 0.7797
+------ step 6600: train_loss 2.6835 (ct 0.6473, c 1.0350, L2 1.0012), train_accuracy 0.7669 ------
+------ validation ------
+Validation results: average_loss 2.6604, average_accuracy 0.7835
+------ step 6700: train_loss 2.8341 (ct 0.7072, c 1.1270, L2 0.9999), train_accuracy 0.7376 ------
+------ validation ------
+Validation results: average_loss 2.6597, average_accuracy 0.7847
+------ step 6800: train_loss 2.7255 (ct 0.7627, c 0.9641, L2 0.9987), train_accuracy 0.7898 ------
+------ validation ------
+Validation results: average_loss 2.6524, average_accuracy 0.7872
+------ step 6900: train_loss 2.5248 (ct 0.5739, c 0.9533, L2 0.9975), train_accuracy 0.8021 ------
+------ validation ------
+Validation results: average_loss 2.6469, average_accuracy 0.7821
+------ step 7000: train_loss 2.6823 (ct 0.6904, c 0.9952, L2 0.9966), train_accuracy 0.7400 ------
+------ validation ------
+Validation results: average_loss 2.6600, average_accuracy 0.7769
+------ step 7100: train_loss 2.5591 (ct 0.6238, c 0.9396, L2 0.9957), train_accuracy 0.7928 ------
+------ validation ------
+Validation results: average_loss 2.6393, average_accuracy 0.7801
+------ step 7200: train_loss 2.7572 (ct 0.7327, c 1.0295, L2 0.9950), train_accuracy 0.7500 ------
+------ validation ------
+Validation results: average_loss 2.6368, average_accuracy 0.7821
+------ step 7300: train_loss 2.9270 (ct 0.7333, c 1.1992, L2 0.9945), train_accuracy 0.7087 ------
+------ validation ------
+Validation results: average_loss 2.6369, average_accuracy 0.7851
+------ step 7400: train_loss 2.6034 (ct 0.6617, c 0.9475, L2 0.9941), train_accuracy 0.8016 ------
+------ validation ------
+Validation results: average_loss 2.6256, average_accuracy 0.7958
+------ step 7500: train_loss 2.5897 (ct 0.6795, c 0.9164, L2 0.9939), train_accuracy 0.8084 ------
+------ validation ------
+Validation results: average_loss 2.6308, average_accuracy 0.7838
+------ step 7600: train_loss 2.5945 (ct 0.6241, c 0.9765, L2 0.9938), train_accuracy 0.7625 ------
+------ validation ------
+Validation results: average_loss 2.6182, average_accuracy 0.7884
+------ step 7700: train_loss 2.7966 (ct 0.7015, c 1.1012, L2 0.9939), train_accuracy 0.7268 ------
+------ validation ------
+Validation results: average_loss 2.6445, average_accuracy 0.7809
+------ step 7800: train_loss 2.6825 (ct 0.6431, c 1.0453, L2 0.9940), train_accuracy 0.7656 ------
+------ validation ------
+Validation results: average_loss 2.6073, average_accuracy 0.7867
+------ step 7900: train_loss 2.5443 (ct 0.7137, c 0.8363, L2 0.9943), train_accuracy 0.8317 ------
+------ validation ------
+Validation results: average_loss 2.6475, average_accuracy 0.7837
+------ step 8000: train_loss 2.6433 (ct 0.6391, c 1.0094, L2 0.9947), train_accuracy 0.7768 ------
+------ validation ------
+Validation results: average_loss 2.6669, average_accuracy 0.7684
+------ step 8100: train_loss 2.6596 (ct 0.6729, c 0.9915, L2 0.9952), train_accuracy 0.7725 ------
+------ validation ------
+Validation results: average_loss 2.6288, average_accuracy 0.7830
+------ step 8200: train_loss 2.5578 (ct 0.5860, c 0.9760, L2 0.9957), train_accuracy 0.7661 ------
+------ validation ------
+Validation results: average_loss 2.6368, average_accuracy 0.7828
+------ step 8300: train_loss 2.6323 (ct 0.6788, c 0.9572, L2 0.9964), train_accuracy 0.7878 ------
+------ validation ------
+Validation results: average_loss 2.6385, average_accuracy 0.7794
+------ step 8400: train_loss 2.7136 (ct 0.7029, c 1.0135, L2 0.9971), train_accuracy 0.7542 ------
+------ validation ------
+Validation results: average_loss 2.6445, average_accuracy 0.7918
+------ step 8500: train_loss 2.7811 (ct 0.7143, c 1.0689, L2 0.9979), train_accuracy 0.7593 ------
+------ validation ------
+Validation results: average_loss 2.6351, average_accuracy 0.7772
+------ step 8600: train_loss 2.7145 (ct 0.6790, c 1.0368, L2 0.9987), train_accuracy 0.7703 ------
+------ validation ------
+Validation results: average_loss 2.6333, average_accuracy 0.7761
+------ step 8700: train_loss 2.5560 (ct 0.7215, c 0.8348, L2 0.9997), train_accuracy 0.8152 ------
+------ validation ------
+Validation results: average_loss 2.6325, average_accuracy 0.7907
+------ step 8800: train_loss 2.8258 (ct 0.7316, c 1.0934, L2 1.0008), train_accuracy 0.7427 ------
+------ validation ------
+Validation results: average_loss 2.6426, average_accuracy 0.7888
+------ step 8900: train_loss 2.6179 (ct 0.6510, c 0.9650, L2 1.0019), train_accuracy 0.7954 ------
+------ validation ------
+Validation results: average_loss 2.6445, average_accuracy 0.7720
+------ step 9000: train_loss 2.7312 (ct 0.6726, c 1.0554, L2 1.0032), train_accuracy 0.7651 ------
+------ validation ------
+Validation results: average_loss 2.6325, average_accuracy 0.7843
+------ step 9100: train_loss 2.7529 (ct 0.7001, c 1.0482, L2 1.0046), train_accuracy 0.7456 ------
+------ validation ------
+Validation results: average_loss 2.6215, average_accuracy 0.7891
+------ step 9200: train_loss 2.5950 (ct 0.6263, c 0.9627, L2 1.0060), train_accuracy 0.7682 ------
+------ validation ------
+Validation results: average_loss 2.6584, average_accuracy 0.7654
+------ step 9300: train_loss 2.6382 (ct 0.6828, c 0.9479, L2 1.0075), train_accuracy 0.7775 ------
+------ validation ------
+Validation results: average_loss 2.6105, average_accuracy 0.7912
+------ step 9400: train_loss 2.6332 (ct 0.6809, c 0.9433, L2 1.0090), train_accuracy 0.7713 ------
+------ validation ------
+Validation results: average_loss 2.6334, average_accuracy 0.7869
+------ step 9500: train_loss 2.7687 (ct 0.7046, c 1.0535, L2 1.0106), train_accuracy 0.7126 ------
+------ validation ------
+Validation results: average_loss 2.6326, average_accuracy 0.7886
+------ step 9600: train_loss 2.9028 (ct 0.7182, c 1.1724, L2 1.0122), train_accuracy 0.7436 ------
+------ validation ------
+Validation results: average_loss 2.6292, average_accuracy 0.7836
+------ step 9700: train_loss 2.6755 (ct 0.7463, c 0.9152, L2 1.0140), train_accuracy 0.7958 ------
+------ validation ------
+Validation results: average_loss 2.6541, average_accuracy 0.7643
+------ step 9800: train_loss 2.5972 (ct 0.6665, c 0.9150, L2 1.0158), train_accuracy 0.8001 ------
+------ validation ------
+Validation results: average_loss 2.6401, average_accuracy 0.7859
+------ step 9900: train_loss 2.5547 (ct 0.5905, c 0.9466, L2 1.0176), train_accuracy 0.7995 ------
+------ validation ------
+Validation results: average_loss 2.6426, average_accuracy 0.7895
+------ step 10000: train_loss 2.5794 (ct 0.6559, c 0.9039, L2 1.0196), train_accuracy 0.8106 ------
+------ validation ------
+Validation results: average_loss 2.6317, average_accuracy 0.7931
+Checkpoint saved at step 10000
+------ step 10100: train_loss 2.7646 (ct 0.6950, c 1.0479, L2 1.0217), train_accuracy 0.7546 ------
+------ validation ------
+Validation results: average_loss 2.6553, average_accuracy 0.7946
+------ step 10200: train_loss 2.7230 (ct 0.6915, c 1.0078, L2 1.0237), train_accuracy 0.7629 ------
+------ validation ------
+Validation results: average_loss 2.6317, average_accuracy 0.7920
+------ step 10300: train_loss 2.5549 (ct 0.6327, c 0.8964, L2 1.0258), train_accuracy 0.8173 ------
+------ validation ------
+Validation results: average_loss 2.6763, average_accuracy 0.7698
+------ step 10400: train_loss 2.7016 (ct 0.6971, c 0.9765, L2 1.0280), train_accuracy 0.7844 ------
+------ validation ------
+Validation results: average_loss 2.6627, average_accuracy 0.7818
+------ step 10500: train_loss 2.6804 (ct 0.6793, c 0.9710, L2 1.0301), train_accuracy 0.7650 ------
+------ validation ------
+Validation results: average_loss 2.6411, average_accuracy 0.7908
+------ step 10600: train_loss 2.6764 (ct 0.6449, c 0.9992, L2 1.0323), train_accuracy 0.7974 ------
+------ validation ------
+Validation results: average_loss 2.6465, average_accuracy 0.7808
+------ step 10700: train_loss 2.6775 (ct 0.7047, c 0.9383, L2 1.0346), train_accuracy 0.8014 ------
+------ validation ------
+Validation results: average_loss 2.6526, average_accuracy 0.7979
+------ step 10800: train_loss 2.7059 (ct 0.6845, c 0.9845, L2 1.0370), train_accuracy 0.7643 ------
+------ validation ------
+Validation results: average_loss 2.6495, average_accuracy 0.7835
+------ step 10900: train_loss 2.6720 (ct 0.6351, c 0.9975, L2 1.0394), train_accuracy 0.7608 ------
+------ validation ------
+Validation results: average_loss 2.6509, average_accuracy 0.7825
+------ step 11000: train_loss 2.5953 (ct 0.6620, c 0.8916, L2 1.0417), train_accuracy 0.8142 ------
+------ validation ------
+Validation results: average_loss 2.6524, average_accuracy 0.7819
+------ step 11100: train_loss 2.6574 (ct 0.5935, c 1.0196, L2 1.0442), train_accuracy 0.7692 ------
+------ validation ------
+Validation results: average_loss 2.6503, average_accuracy 0.7912
+------ step 11200: train_loss 2.5964 (ct 0.5879, c 0.9618, L2 1.0468), train_accuracy 0.7521 ------
+------ validation ------
+Validation results: average_loss 2.6557, average_accuracy 0.7820
+------ step 11300: train_loss 2.7890 (ct 0.6436, c 1.0961, L2 1.0493), train_accuracy 0.7342 ------
+------ validation ------
+Validation results: average_loss 2.6673, average_accuracy 0.7762
+------ step 11400: train_loss 2.5303 (ct 0.6023, c 0.8761, L2 1.0518), train_accuracy 0.8030 ------
+------ validation ------
+Validation results: average_loss 2.6447, average_accuracy 0.7915
+------ step 11500: train_loss 2.6674 (ct 0.6035, c 1.0094, L2 1.0544), train_accuracy 0.7711 ------
+------ validation ------
+Validation results: average_loss 2.6467, average_accuracy 0.7918
+------ step 11600: train_loss 2.7987 (ct 0.7300, c 1.0116, L2 1.0571), train_accuracy 0.7776 ------
+------ validation ------
+Validation results: average_loss 2.6644, average_accuracy 0.7857
+------ step 11700: train_loss 2.7896 (ct 0.7299, c 0.9998, L2 1.0599), train_accuracy 0.8033 ------
+------ validation ------
+Validation results: average_loss 2.6509, average_accuracy 0.7862
+------ step 11800: train_loss 2.7535 (ct 0.6984, c 0.9922, L2 1.0628), train_accuracy 0.7815 ------
+------ validation ------
+Validation results: average_loss 2.6635, average_accuracy 0.7838
+------ step 11900: train_loss 2.7120 (ct 0.6788, c 0.9675, L2 1.0657), train_accuracy 0.7826 ------
+------ validation ------
+Validation results: average_loss 2.6498, average_accuracy 0.7952
+------ step 12000: train_loss 2.7703 (ct 0.7318, c 0.9700, L2 1.0686), train_accuracy 0.7732 ------
+------ validation ------
+Validation results: average_loss 2.6595, average_accuracy 0.7900
+------ step 12100: train_loss 2.6463 (ct 0.6580, c 0.9167, L2 1.0716), train_accuracy 0.7994 ------
+------ validation ------
+Validation results: average_loss 2.6616, average_accuracy 0.7912
+------ step 12200: train_loss 2.7160 (ct 0.7088, c 0.9324, L2 1.0747), train_accuracy 0.7864 ------
+------ validation ------
+Validation results: average_loss 2.6668, average_accuracy 0.7947
+------ step 12300: train_loss 2.6121 (ct 0.6156, c 0.9188, L2 1.0778), train_accuracy 0.7931 ------
+------ validation ------
+Validation results: average_loss 2.6787, average_accuracy 0.7949
+------ step 12400: train_loss 2.5689 (ct 0.6090, c 0.8790, L2 1.0809), train_accuracy 0.8119 ------
+------ validation ------
+Validation results: average_loss 2.6782, average_accuracy 0.7928
+------ step 12500: train_loss 2.6253 (ct 0.6464, c 0.8949, L2 1.0840), train_accuracy 0.8281 ------
+------ validation ------
+Validation results: average_loss 2.6708, average_accuracy 0.7891
+------ step 12600: train_loss 2.5241 (ct 0.6046, c 0.8323, L2 1.0872), train_accuracy 0.8011 ------
+------ validation ------
+Validation results: average_loss 2.6727, average_accuracy 0.7948
+------ step 12700: train_loss 2.8323 (ct 0.6890, c 1.0529, L2 1.0904), train_accuracy 0.7502 ------
+------ validation ------
+Validation results: average_loss 2.6954, average_accuracy 0.7845
+------ step 12800: train_loss 2.7731 (ct 0.7043, c 0.9753, L2 1.0935), train_accuracy 0.7676 ------
+------ validation ------
+Validation results: average_loss 2.6790, average_accuracy 0.7891
+------ step 12900: train_loss 2.7775 (ct 0.6854, c 0.9954, L2 1.0968), train_accuracy 0.7744 ------
+------ validation ------
+Validation results: average_loss 2.6882, average_accuracy 0.7889
+------ step 13000: train_loss 2.7186 (ct 0.6841, c 0.9344, L2 1.1000), train_accuracy 0.7951 ------
+------ validation ------
+Validation results: average_loss 2.6928, average_accuracy 0.7947
+------ step 13100: train_loss 2.7189 (ct 0.6493, c 0.9663, L2 1.1032), train_accuracy 0.7844 ------
+------ validation ------
+Validation results: average_loss 2.6856, average_accuracy 0.7823
+------ step 13200: train_loss 2.7964 (ct 0.6783, c 1.0116, L2 1.1066), train_accuracy 0.7290 ------
+------ validation ------
+Validation results: average_loss 2.7040, average_accuracy 0.7811
+------ step 13300: train_loss 2.7883 (ct 0.6449, c 1.0336, L2 1.1098), train_accuracy 0.7146 ------
+------ validation ------
+Validation results: average_loss 2.6943, average_accuracy 0.7872
+------ step 13400: train_loss 2.5823 (ct 0.6562, c 0.8129, L2 1.1132), train_accuracy 0.8179 ------
+------ validation ------
+Validation results: average_loss 2.6895, average_accuracy 0.7900
+------ step 13500: train_loss 2.6575 (ct 0.5878, c 0.9530, L2 1.1167), train_accuracy 0.7966 ------
+------ validation ------
+Validation results: average_loss 2.7091, average_accuracy 0.7849
+------ step 13600: train_loss 2.7642 (ct 0.6703, c 0.9739, L2 1.1200), train_accuracy 0.7756 ------
+------ validation ------
+Validation results: average_loss 2.7170, average_accuracy 0.7822
+------ step 13700: train_loss 2.9166 (ct 0.7576, c 1.0357, L2 1.1233), train_accuracy 0.7764 ------
+------ validation ------
+Validation results: average_loss 2.7202, average_accuracy 0.7965
+------ step 13800: train_loss 2.6075 (ct 0.6252, c 0.8555, L2 1.1268), train_accuracy 0.8110 ------
+------ validation ------
+Validation results: average_loss 2.7103, average_accuracy 0.7916
+------ step 13900: train_loss 2.7375 (ct 0.6130, c 0.9943, L2 1.1302), train_accuracy 0.7600 ------
+------ validation ------
+Validation results: average_loss 2.7513, average_accuracy 0.7668
+------ step 14000: train_loss 2.6817 (ct 0.6813, c 0.8667, L2 1.1337), train_accuracy 0.8103 ------
+------ validation ------
+Validation results: average_loss 2.7231, average_accuracy 0.7883
+------ step 14100: train_loss 2.8319 (ct 0.6152, c 1.0794, L2 1.1373), train_accuracy 0.7200 ------
+------ validation ------
+Validation results: average_loss 2.7222, average_accuracy 0.7920
+------ step 14200: train_loss 2.6398 (ct 0.5571, c 0.9417, L2 1.1409), train_accuracy 0.7624 ------
+------ validation ------
+Validation results: average_loss 2.7388, average_accuracy 0.7898
+------ step 14300: train_loss 2.8092 (ct 0.7271, c 0.9375, L2 1.1446), train_accuracy 0.7957 ------
+------ validation ------
+Validation results: average_loss 2.7378, average_accuracy 0.7870
+------ step 14400: train_loss 2.7315 (ct 0.6065, c 0.9768, L2 1.1482), train_accuracy 0.7874 ------
+------ validation ------
+Validation results: average_loss 2.7239, average_accuracy 0.7927
+------ step 14500: train_loss 2.7742 (ct 0.6858, c 0.9364, L2 1.1520), train_accuracy 0.7849 ------
+------ validation ------
+Validation results: average_loss 2.7465, average_accuracy 0.7695
+------ step 14600: train_loss 2.8994 (ct 0.7336, c 1.0101, L2 1.1557), train_accuracy 0.7583 ------
+------ validation ------
+Validation results: average_loss 2.7373, average_accuracy 0.7829
+------ step 14700: train_loss 2.6962 (ct 0.6689, c 0.8679, L2 1.1594), train_accuracy 0.8229 ------
+------ validation ------
+Validation results: average_loss 2.7384, average_accuracy 0.7896
+------ step 14800: train_loss 2.7677 (ct 0.6481, c 0.9566, L2 1.1630), train_accuracy 0.7736 ------
+------ validation ------
+Validation results: average_loss 2.7288, average_accuracy 0.7915
+------ step 14900: train_loss 2.8428 (ct 0.5647, c 1.1115, L2 1.1667), train_accuracy 0.7296 ------
+------ validation ------
+Validation results: average_loss 2.7415, average_accuracy 0.7929
+------ step 15000: train_loss 2.6857 (ct 0.6155, c 0.8998, L2 1.1703), train_accuracy 0.8183 ------
+------ validation ------
+Validation results: average_loss 2.7554, average_accuracy 0.7947
+Checkpoint saved at step 15000
+------ step 15100: train_loss 2.9248 (ct 0.6921, c 1.0587, L2 1.1741), train_accuracy 0.7130 ------
+------ validation ------
+Validation results: average_loss 2.7534, average_accuracy 0.7972
+------ step 15200: train_loss 3.0325 (ct 0.7285, c 1.1262, L2 1.1778), train_accuracy 0.7148 ------
+------ validation ------
+Validation results: average_loss 2.7613, average_accuracy 0.7962
+------ step 15300: train_loss 3.0648 (ct 0.7906, c 1.0927, L2 1.1815), train_accuracy 0.7523 ------
+------ validation ------
+Validation results: average_loss 2.7748, average_accuracy 0.7850
+------ step 15400: train_loss 2.8363 (ct 0.7022, c 0.9487, L2 1.1854), train_accuracy 0.7828 ------
+------ validation ------
+Validation results: average_loss 2.7664, average_accuracy 0.7850
+------ step 15500: train_loss 2.8435 (ct 0.6834, c 0.9709, L2 1.1893), train_accuracy 0.7460 ------
+------ validation ------
+Validation results: average_loss 2.7672, average_accuracy 0.7852
+------ step 15600: train_loss 2.7219 (ct 0.6093, c 0.9194, L2 1.1932), train_accuracy 0.8071 ------
+------ validation ------
+Validation results: average_loss 2.7772, average_accuracy 0.7755
+------ step 15700: train_loss 2.7342 (ct 0.6196, c 0.9174, L2 1.1972), train_accuracy 0.7877 ------
+------ validation ------
+Validation results: average_loss 2.7703, average_accuracy 0.7860
+------ step 15800: train_loss 2.7527 (ct 0.6089, c 0.9427, L2 1.2010), train_accuracy 0.7689 ------
+------ validation ------
+Validation results: average_loss 2.7720, average_accuracy 0.7906
+------ step 15900: train_loss 2.7869 (ct 0.6633, c 0.9187, L2 1.2049), train_accuracy 0.7765 ------
+------ validation ------
+Validation results: average_loss 2.7801, average_accuracy 0.7866
+------ step 16000: train_loss 2.8122 (ct 0.6778, c 0.9257, L2 1.2087), train_accuracy 0.7719 ------
+------ validation ------
+Validation results: average_loss 2.7790, average_accuracy 0.7967
+------ step 16100: train_loss 3.0513 (ct 0.7462, c 1.0924, L2 1.2127), train_accuracy 0.7365 ------
+------ validation ------
+Validation results: average_loss 2.7763, average_accuracy 0.7922
+------ step 16200: train_loss 2.8014 (ct 0.6303, c 0.9546, L2 1.2164), train_accuracy 0.7517 ------
+------ validation ------
+Validation results: average_loss 2.7798, average_accuracy 0.7959
+------ step 16300: train_loss 2.9349 (ct 0.7005, c 1.0140, L2 1.2204), train_accuracy 0.7634 ------
+------ validation ------
+Validation results: average_loss 2.7880, average_accuracy 0.7898
+------ step 16400: train_loss 2.9556 (ct 0.7150, c 1.0162, L2 1.2244), train_accuracy 0.7587 ------
+------ validation ------
+Validation results: average_loss 2.7817, average_accuracy 0.8002
+------ step 16500: train_loss 2.7741 (ct 0.6665, c 0.8792, L2 1.2283), train_accuracy 0.8154 ------
+------ validation ------
+Validation results: average_loss 2.7856, average_accuracy 0.7894
+------ step 16600: train_loss 2.9266 (ct 0.7181, c 0.9762, L2 1.2323), train_accuracy 0.7447 ------
+------ validation ------
+Validation results: average_loss 2.7788, average_accuracy 0.8014
+------ step 16700: train_loss 2.7682 (ct 0.6176, c 0.9142, L2 1.2363), train_accuracy 0.7923 ------
+------ validation ------
+Validation results: average_loss 2.7950, average_accuracy 0.7928
+------ step 16800: train_loss 2.9705 (ct 0.7142, c 1.0158, L2 1.2405), train_accuracy 0.7522 ------
+------ validation ------
+Validation results: average_loss 2.8147, average_accuracy 0.7953
+------ step 16900: train_loss 2.8473 (ct 0.6771, c 0.9257, L2 1.2445), train_accuracy 0.8078 ------
+------ validation ------
+Validation results: average_loss 2.8112, average_accuracy 0.7867
+------ step 17000: train_loss 3.1075 (ct 0.7241, c 1.1348, L2 1.2486), train_accuracy 0.7312 ------
+------ validation ------
+Validation results: average_loss 2.8173, average_accuracy 0.7842
+------ step 17100: train_loss 2.9255 (ct 0.6466, c 1.0263, L2 1.2527), train_accuracy 0.7585 ------
+------ validation ------
+Validation results: average_loss 2.8101, average_accuracy 0.8017
+------ step 17200: train_loss 2.7018 (ct 0.5675, c 0.8777, L2 1.2566), train_accuracy 0.8096 ------
+------ validation ------
+Validation results: average_loss 2.8178, average_accuracy 0.7946
+------ step 17300: train_loss 2.8351 (ct 0.7087, c 0.8658, L2 1.2607), train_accuracy 0.8063 ------
+------ validation ------
+Validation results: average_loss 2.8155, average_accuracy 0.7933
+------ step 17400: train_loss 2.7189 (ct 0.5990, c 0.8552, L2 1.2647), train_accuracy 0.7865 ------
+------ validation ------
+Validation results: average_loss 2.8321, average_accuracy 0.7898
+------ step 17500: train_loss 2.7362 (ct 0.5800, c 0.8875, L2 1.2687), train_accuracy 0.7979 ------
+------ validation ------
+Validation results: average_loss 2.8419, average_accuracy 0.7864
