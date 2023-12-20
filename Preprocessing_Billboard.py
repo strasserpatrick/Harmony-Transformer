@@ -10,6 +10,35 @@ from tqdm import tqdm
 
 root_dir = Path(__file__).parent
 
+table = {
+        "C:maj": 0,
+        "C#:maj": 1,
+        "D:maj": 2,
+        "D#:maj": 3,
+        "E:maj": 4,
+        "F:maj": 5,
+        "F#:maj": 6,
+        "G:maj": 7,
+        "G#:maj": 8,
+        "A:maj": 9,
+        "A#:maj": 10,
+        "B:maj": 11,
+        "C:min": 12,
+        "C#:min": 13,
+        "D:min": 14,
+        "D#:min": 15,
+        "E:min": 16,
+        "F:min": 17,
+        "F#:min": 18,
+        "G:min": 19,
+        "G#:min": 20,
+        "A:min": 21,
+        "A#:min": 22,
+        "B:min": 23,
+        "N": 24,
+        "X": 25,
+    }
+
 
 def enharmonic(chord):
     enharmonic_table = {
@@ -58,34 +87,6 @@ def compute_Tonal_centroids(chromagram, filtering=True, sigma=8):
 
 
 def chord2int(chord):
-    table = {
-        "C:maj": 0,
-        "C#:maj": 1,
-        "D:maj": 2,
-        "D#:maj": 3,
-        "E:maj": 4,
-        "F:maj": 5,
-        "F#:maj": 6,
-        "G:maj": 7,
-        "G#:maj": 8,
-        "A:maj": 9,
-        "A#:maj": 10,
-        "B:maj": 11,
-        "C:min": 12,
-        "C#:min": 13,
-        "D:min": 14,
-        "D#:min": 15,
-        "E:min": 16,
-        "F:min": 17,
-        "F#:min": 18,
-        "G:min": 19,
-        "G#:min": 20,
-        "A:min": 21,
-        "A#:min": 22,
-        "B:min": 23,
-        "N": 24,
-        "X": 25,
-    }
 
     try:
         return table[chord]
