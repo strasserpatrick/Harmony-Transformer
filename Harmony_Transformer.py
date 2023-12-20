@@ -1059,12 +1059,11 @@ class Harmony_Transformer(object):
 
         model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
         saver = tf.train.import_meta_graph(str(model_meta_path))
-        print("model restored from", model_checkpoint_path)
 
         with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
             sess.run(tf.global_variables_initializer())
             saver.restore(sess, tf.train.latest_checkpoint(str(model_checkpoint_path)))
-            print("model restored from checkpoint")
+            print("model restored from", model_checkpoint_path)
 
             # validation
             inference_run_list = [
@@ -1088,13 +1087,16 @@ class Harmony_Transformer(object):
                 inference_cc_logits,
             ) = sess.run(inference_run_list, feed_dict=inference_feed_dict)
 
+            # TODO: add ground truth
+
             print("inference completed")
 
-            print("chord_predictions shape:", inference_chord_predictions.shape)
-            print("chord_logits shape:", inference_chord_logits.shape)
-            print("chord_change_predictions shape:", inference_cc_predictions.shape)
-            print("chord_change_logits shape:", inference_cc_logits.shape)
-
+            print("chord_predictions:", inference_chord_predictions)
+            print("chord_change_predictions:", inference_cc_predictions)
+        
+            print("chord_logits:", inference_chord_logits)
+            print("chord_change_logits:", inference_cc_logits)    
+            
 
 @click.group()
 def main():
