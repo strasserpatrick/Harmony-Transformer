@@ -31,7 +31,7 @@ class Harmony_Transformer(object):
         lambda_loss_ct=3,
         lambda_loss_c=1,
         lambda_L2=2e-4,
-        training_steps=100000,
+        training_steps=50000,
         save_checkpoint_every_n_steps=5000,
         checkpoint_path: Path = None,
         early_stopping_counter=15,
@@ -738,7 +738,7 @@ class Harmony_Transformer(object):
             split_sets,
         )
 
-    def train(self, valid=True, early_stopping=True):
+    def train(self, valid=True, early_stopping=False):
         # load input data
         print("load input data...")
         (
