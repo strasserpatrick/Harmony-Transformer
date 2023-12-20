@@ -1027,9 +1027,11 @@ class Harmony_Transformer(object):
                     print(f"Checkpoint saved at step {step}")
 
 
-    def inference(self, model_checkpoint_path: Path, x_inference):
+    def inference(self, model_checkpoint_path: Path, x_inference, TC_inference, y, y_cc, y_len):
 
         print("build model...")
+
+        # TODO: add ground truth and TC_inference? why is this not used?
 
         with tf.name_scope("placeholder"):
             x = tf.placeholder(
@@ -1091,10 +1093,12 @@ class Harmony_Transformer(object):
 
             print("inference completed")
 
+            print("chord_ground_truth", y)
             print("chord_predictions:", inference_chord_predictions)
-            print("chord_change_predictions:", inference_cc_predictions)
-        
             print("chord_logits:", inference_chord_logits)
+        
+            print("chord_change_ground_truth", y_cc)
+            print("chord_change_predictions:", inference_cc_predictions)
             print("chord_change_logits:", inference_cc_logits)    
             
 
@@ -1141,9 +1145,13 @@ def inference(model_checkpoint_path: Path, inference_path: Path):
 
     with np.load(inference_path, allow_pickle=True) as input_data:
         x_inference = input_data["x_inference"]
+        TC_inference = input_data["TC_inference"]
+        y = input_data["y"]
+        y_cc = input_data["y_cc"]
+        y_len = input_data["y_len"]
 
     model.inference(
-        model_checkpoint_path=model_checkpoint_path, x_inference=x_inference
+        model_checkpoint_path=model_checkpoint_path, x_inference=x_inference, TC_inference=TC_inference, y=y, y_cc=y_cc, y_len=y_len
     )
 
 
