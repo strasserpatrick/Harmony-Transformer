@@ -1,4 +1,3 @@
-import pickle
 import click
 import numpy as np
 import pandas as pd
@@ -13,7 +12,7 @@ def preprocess_data_read(
 ):
     annotations = {}
 
-    for foldername in inference_data_path.iterdir():
+    for foldername in [p for p in inference_data_path.iterdir() if p.is_dir()]:
         song_name = foldername.name
         annotations_path = inference_data_path / song_name / "minmaj.csv"
         chroma_path = inference_data_path / song_name / "bothchroma.csv"
@@ -187,7 +186,7 @@ def preprocess_data_segment(inference_data_augment: dict, segment_width=21, segm
 
     return inference_data_segment
 
-def preprocess_data_reshape(inference_data_segment: dict, out_dir: Path, n_steps=100):
+def preprocess_data_reshape(inference_data_segment: dict, n_steps=100):
     print("Running Message: reshape inference data segment ...")
 
     inference_data_reshape = {}
@@ -256,9 +255,73 @@ def preprocess_data_reshape(inference_data_segment: dict, out_dir: Path, n_steps
         inference_data_reshape[key]["nSequence"] = n_sequences
         # inference_data_reshape[key]['nSegment'] = (n_sequences // 2 + 1)*n_steps - n_pad
         
-        with open(out_dir / "final_reshaped_data.pkl", "wb") as f:
-            pickle.dump(inference_data_reshape, f)
-        print(f"reshaped inference data saved at {out_dir}")
+    return inference_data_reshape
+
+def preprocess_data_split(inference_data_reshape, inference_dir: Path):
+
+
+    ops = sorted([p.name for p in inference_dir.iterdir() if p.is_dir()])
+    split_sets = {"inference": []}
+    for i, op in enumerate(ops):
+
+        info = (
+            op,
+            inference_data_reshape[op]["nSequence"] // 2 + 1,
+        )  # (opus, number of sequences)
+        split_sets["inference"].append(info)
+
+    x_inference = np.concatenate(
+        [
+            inference_data_reshape[info[0]]["chroma"][::2]
+            for info in split_sets["inference"]
+        ],
+        axis=0,
+    )
+
+    TC_inference = np.concatenate(
+        [
+            inference_data_reshape[info[0]]["TC"][::2]
+            for info in split_sets["inference"]
+        ],
+        axis=0,
+    ) # [n_sequences, n_steps, 6]
+
+    y_inference = np.concatenate(
+        [
+            inference_data_reshape[info[0]]["chord"][::2]
+            for info in split_sets["inference"]
+        ],
+        axis=0,
+    ) # [n_sequences, n_steps]
+
+    y_cc_inference = np.concatenate(
+        [
+            inference_data_reshape[info[0]]["chordChange"][::2]
+            for info in split_sets["inference"]
+        ],
+        axis=0,
+    ) # [n_sequences, n_steps]
+
+    y_len_inference = np.concatenate(
+        [
+            inference_data_reshape[info[0]]["sequenceLen"][::2]
+            for info in split_sets["inference"]
+        ],
+        axis=0,
+    ) # [n_sequences,]
+
+    
+    with open(inference_dir / "final_splited_data.pkl", "wb") as output_file:
+        np.savez_compressed(
+            output_file,
+            x_inference=x_inference,
+            TC_inference=TC_inference,
+            y_inference=y_inference,
+            y_cc_inference=y_cc_inference,
+            y_len_inference=y_len_inference,
+        )
+
+    print("preprocessing finished")
 
 
 
@@ -277,7 +340,8 @@ def main(inference_data_path: Path):
     inference_data_augment = preprocess_data_augment(inference_data=inference_data)
     infererence_data_segment = preprocess_data_segment(inference_data_augment=inference_data_augment)
 
-    preprocess_data_reshape(inference_data_segment=infererence_data_segment, out_dir=inference_data_path)
+    inference_data_reshape = preprocess_data_reshape(inference_data_segment=infererence_data_segment)
+    preprocess_data_split(inference_data_reshape=inference_data_reshape, inference_dir=inference_data_path)
 
 
 if __name__ == "__main__":

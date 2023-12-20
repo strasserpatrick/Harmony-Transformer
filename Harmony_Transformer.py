@@ -1137,14 +1137,14 @@ def train(
 def inference(model_checkpoint_path: Path, inference_path: Path):
     model = Harmony_Transformer()
 
-    # read pkl numpy array
-    with open(inference_path, "rb") as f:
-        inference_input = np.load(f)
+    with np.load(inference_path, allow_pickle=True) as input_data:
+        x_inference = input_data["x_inference"]
 
     model.inference(
-        model_checkpoint_path=model_checkpoint_path, x_inference=inference_input
+        model_checkpoint_path=model_checkpoint_path, x_inference=x_inference
     )
 
 
 if __name__ == "__main__":
     main()
+    
