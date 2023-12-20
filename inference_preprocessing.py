@@ -6,64 +6,73 @@ from pathlib import Path
 
 from Preprocessing_Billboard import compute_Tonal_centroids, enharmonic, chord2int
 
+root_dir = Path(__file__).parent
 
 def preprocess_data_read(
-    song_name: str, chroma_path: pd.DataFrame, annotations_path: pd.DataFrame
+    inference_data_path: Path
 ):
-
-    annotations_df = pd.read_csv(
-        annotations_path, header=None, sep="\t", names=["start", "end", "chord"]
-    )
-
     annotations = {}
-    adt = [
-        ("onset", np.float32),
-        ("end", np.float32),
-        ("chord", object),
-    ]  # dtype of annotations
 
-    song_annotations = []
-    for __, row in annotations_df.iterrows():
-        annotation_triplet = (row["start"], row["end"], row["chord"])
-        song_annotations.append(annotation_triplet)
-    annotations[song_name] = np.array(song_annotations, dtype=adt)
+    for foldername in inference_data_path.iterdir():
+        song_name = foldername.name
+        annotations_path = inference_data / song_name / "minmaj.csv"
+        chroma_path = inference_data / song_name / "bothchroma.csv"
 
-    inference_data = {}
-    dt = [
-        ("op", object),
-        ("onset", np.float32),
-        ("chroma", object),
-        ("chord", np.int32),
-        ("chordChange", np.int32),
-    ]  # dtype of output data
+        print(f"Running Message: reading {song_name} ...")
 
-    rows = np.genfromtxt(chroma_path, delimiter=",")
-    frames = []
-    pre_chord = None
-    for r, row in enumerate(rows):
-        onset = row[0]
-        chroma1 = row[1:13]
-        chroma2 = row[13:25]
-        chroma1_norm = chroma1
-        chroma2_norm = chroma2
-        both_chroma = np.concatenate([chroma1_norm, chroma2_norm]).astype(np.float32)
+        annotations_df = pd.read_csv(
+            annotations_path, header=None, sep="\t", names=["start", "end", "chord"]
+        )
 
-        label = annotations[song_name][
-            (annotations[song_name]["onset"] <= onset) & (annotations[song_name]["end"] > onset)
-        ]
-        try:
-            chord = label["chord"][0]
-            root = chord.split(":")[0]
-            if "b" in root:
-                chord = enharmonic(chord)
-            chord_int = chord2int(chord)
-        except:
-            print("ErrorMessage: cannot find label: piece %s, onset %f" % (song_name, onset))
-            quit()
-        chordChange = 0 if chord_int == pre_chord else 1
-        pre_chord = chord_int
+        
+        adt = [
+            ("onset", np.float32),
+            ("end", np.float32),
+            ("chord", object),
+        ]  # dtype of annotations
 
-        frames.append((song_name, onset, both_chroma, chord_int, chordChange))
+        song_annotations = []
+        for __, row in annotations_df.iterrows():
+            annotation_triplet = (row["start"], row["end"], row["chord"])
+            song_annotations.append(annotation_triplet)
+        annotations[song_name] = np.array(song_annotations, dtype=adt)
+
+        inference_data = {}
+        dt = [
+            ("op", object),
+            ("onset", np.float32),
+            ("chroma", object),
+            ("chord", np.int32),
+            ("chordChange", np.int32),
+        ]  # dtype of output data
+
+        rows = np.genfromtxt(chroma_path, delimiter=",")
+        frames = []
+        pre_chord = None
+        for r, row in enumerate(rows):
+            onset = row[0]
+            chroma1 = row[1:13]
+            chroma2 = row[13:25]
+            chroma1_norm = chroma1
+            chroma2_norm = chroma2
+            both_chroma = np.concatenate([chroma1_norm, chroma2_norm]).astype(np.float32)
+
+            label = annotations[song_name][
+                (annotations[song_name]["onset"] <= onset) & (annotations[song_name]["end"] > onset)
+            ]
+            try:
+                chord = label["chord"][0]
+                root = chord.split(":")[0]
+                if "b" in root:
+                    chord = enharmonic(chord)
+                chord_int = chord2int(chord)
+            except:
+                print("ErrorMessage: cannot find label: piece %s, onset %f" % (song_name, onset))
+                quit()
+            chordChange = 0 if chord_int == pre_chord else 1
+            pre_chord = chord_int
+
+            frames.append((song_name, onset, both_chroma, chord_int, chordChange))
 
     inference_data[song_name] = np.array(frames, dtype=dt)  # [time, ]
 
@@ -254,28 +263,21 @@ def preprocess_data_reshape(inference_data_segment: dict, out_dir: Path, n_steps
 
 
 @click.command()
-@click.option("--song_name", type=str, default="penny_lane", help="Song name")
 @click.option(
-    "--chroma_path",
+    "--inference_data_path",
     type=Path,
-    default="own_examples/penny_lane/penny_lane_bothchroma_transformed.csv",
-    help="Chroma path",
+    default="inference_dataset",
+    help="Inference data path",
 )
-@click.option(
-    "--annotations_path",
-    type=Path,
-    default="own_examples/penny_lane/penny_lane_chord_estimate_transformed.csv",
-    help="Annotations path",
-)
-def main(song_name: str, chroma_path: Path, annotations_path: Path):
+def main(inference_data_path: Path):
 
     inference_data = preprocess_data_read(
-        song_name=song_name, chroma_path=chroma_path, annotations_path=annotations_path
+        inference_data_path=inference_data_path
     )
     inference_data_augment = preprocess_data_augment(inference_data=inference_data)
     infererence_data_segment = preprocess_data_segment(inference_data_augment=inference_data_augment)
 
-    preprocess_data_reshape(inference_data_segment=infererence_data_segment, out_dir=chroma_path.parent)
+    preprocess_data_reshape(inference_data_segment=infererence_data_segment, out_dir=inference_data_path)
 
 
 if __name__ == "__main__":
