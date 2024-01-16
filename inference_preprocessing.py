@@ -10,6 +10,7 @@ root_dir = Path(__file__).parent
 def preprocess_data_read(
     inference_data_path: Path
 ):
+    inference_data = {}
     annotations = {}
 
     for foldername in [p for p in inference_data_path.iterdir() if p.is_dir()]:
@@ -34,9 +35,10 @@ def preprocess_data_read(
         for __, row in annotations_df.iterrows():
             annotation_triplet = (row["start"], row["end"], row["chord"])
             song_annotations.append(annotation_triplet)
+
         annotations[song_name] = np.array(song_annotations, dtype=adt)
 
-        inference_data = {}
+        
         dt = [
             ("op", object),
             ("onset", np.float32),
@@ -73,7 +75,7 @@ def preprocess_data_read(
 
             frames.append((song_name, onset, both_chroma, chord_int, chordChange))
 
-    inference_data[song_name] = np.array(frames, dtype=dt)  # [time, ]
+        inference_data[song_name] = np.array(frames, dtype=dt)  # [time, ]
 
     """ BillboardData = {'Name': structured array with fileds = ('op', 'onset', 'chroma',  'chord', 'chordChange'), ...} """
     # keys: ['0001', '0002', ...]
