@@ -1251,8 +1251,10 @@ def inference(model_checkpoint_path: Path, inference_path: Path):
 
 @main.command()
 @click.option(
-    "--id", type=int, default=1107, help="Index of the song to be tested"
-    "--model_checkpoint_path", type=Path, default=None, help="Path to model checkpoint",
+    "--id", type=int, default=1107, help="Index of the song to be tested",
+)
+@click.option(
+        "--model_checkpoint_path", type=Path, default=None, help="Path to model checkpoint"
 )
 def test(model_checkpoint_path: Path, id: int):
     model = Harmony_Transformer()
