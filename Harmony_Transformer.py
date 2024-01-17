@@ -989,7 +989,7 @@ class Harmony_Transformer(object):
                             valid_loss_sum += valid_loss
                             valid_acc_sum += valid_acc
 
-                            if step % 5000:
+                            if step % 5000 == 0:
                                 # save validation results for step 10000
                                 valid_results_dict = {}
                                 valid_results_dict["chord_ground_truth"] = valid_batch[
@@ -1043,7 +1043,7 @@ class Harmony_Transformer(object):
                         global_step=step,
                     )
                     print(f"Checkpoint saved at step {step}")
-                    
+
 
     def inference(self, model_checkpoint_path: Path, x_inference, y, y_cc, out_dir: Path = root_dir):
 
