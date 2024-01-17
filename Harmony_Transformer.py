@@ -989,6 +989,23 @@ class Harmony_Transformer(object):
                             valid_loss_sum += valid_loss
                             valid_acc_sum += valid_acc
 
+                            if step % 5000:
+                                # save validation results for step 10000
+                                valid_results_dict = {}
+                                valid_results_dict["chord_ground_truth"] = valid_batch[
+                                    2
+                                ].tolist()
+                                valid_results_dict["chord_predictions"] = valid_c_pred.tolist()
+                                valid_results_dict["chord_change_ground_truth"] = valid_batch[
+                                    1
+                                ].tolist()
+                                valid_results_dict["chord_change_predictions"] = valid_cc_pred.tolist()
+                                print(f"saving validation results to {root_dir}")
+                                with open(f"valid_results_{step}.json", "w") as f:
+                                    json.dump(valid_results_dict, f)
+
+
+
                         average_valid_loss = valid_loss_sum / valid_batches
                         average_valid_acc = valid_acc_sum / valid_batches
 
@@ -1026,99 +1043,7 @@ class Harmony_Transformer(object):
                         global_step=step,
                     )
                     print(f"Checkpoint saved at step {step}")
-
-    def test(self, model_checkpoint_path: Path, id: int):
-        # load input data
-        print("load input data...")
-        (
-            x_train,
-            TC_train,
-            y_train,
-            y_cc_train,
-            y_len_train,
-            x_valid,
-            TC_valid,
-            y_valid,
-            y_cc_valid,
-            y_len_valid,
-            split_sets,
-        ) = self.load_data()
-        
-
-        with tf.name_scope("placeholder"):
-            x = tf.placeholder(
-                tf.float32, [None, self._n_steps, self._feature_size], name="encoder_inputs"
-            )  # shape = [batch_size, n_steps, n_inputs]
-            dropout_rate = tf.placeholder(tf.float32, name="dropout_rate")
-            is_training = tf.placeholder(tf.bool, name="is_training")
-            global_step = tf.placeholder(tf.int32, name="global_step")
-            slope = tf.placeholder(tf.float32, name="slope")
-            stochastic_tensor = tf.placeholder(tf.bool, name="stochastic_tensor")
-
-        with tf.name_scope("model"):
-            (
-                encoder_inputs_embedded,
-                chord_change_logits,
-                chord_change_predictions,
-            ) = self.encoder(x, slope, dropout_rate, is_training)
-            logits, chord_predictions = self.decoder(
-                x,
-                encoder_inputs_embedded,
-                chord_change_predictions,
-                dropout_rate,
-                is_training,
-            )
-
-        print("run test on model...")
-
-        model_meta_path = list(model_checkpoint_path.glob("*.meta"))[0]
-        saver = tf.train.import_meta_graph(str(model_meta_path))
-
-        with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
-            sess.run(tf.global_variables_initializer())
-            saver.restore(sess, tf.train.latest_checkpoint(str(model_checkpoint_path)))
-            print("model restored from", model_checkpoint_path)
-
-            # run test for id in test set
-            test_run_list = [
-                chord_predictions,
-                logits,
-                chord_change_predictions,
-                chord_change_logits,
-            ]
-
-            test_feed_dict = {
-                x: x_valid[id],
-                dropout_rate: 0.0,
-                is_training: False,
-                global_step: 0,
-                slope: 1.0,
-                stochastic_tensor: False,
-            }
-
-            (
-                test_chord_predictions,
-                test_chord_logits,
-                test_cc_predictions,
-                test_cc_logits,
-            ) = sess.run(test_run_list, feed_dict=test_feed_dict)
-
-            print("test completed")
-
-            # save test results
-            result_dict = {}
-            result_dict["chord_ground_truth"] = y_valid[id].tolist()
-            result_dict["chord_predictions"] = test_chord_predictions.tolist()
-            result_dict["chord_logits"] = test_chord_logits.tolist()
-            result_dict["chord_change_ground_truth"] = y_cc_valid[id].tolist()
-            result_dict["chord_change_predictions"] = test_cc_predictions.tolist()
-            result_dict["chord_change_logits"] = test_cc_logits.tolist()
-
-            print(f"saving test results to {root_dir}")
-            with open("test_results.json", "w") as f:
-                json.dump(result_dict, f)
-
-
+                    
 
     def inference(self, model_checkpoint_path: Path, x_inference, y, y_cc, out_dir: Path = root_dir):
 
