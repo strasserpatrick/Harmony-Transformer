@@ -990,6 +990,9 @@ class Harmony_Transformer(object):
                             valid_acc_sum += valid_acc
 
                             if step % 5000 == 0:
+                                start_id_ = valid_step * self._batch_size
+                                end_id_ = (valid_step + 1) * self._batch_size
+
                                 # save validation results for step 10000
                                 valid_results_dict = {}
                                 valid_results_dict["chord_ground_truth"] = valid_batch[
@@ -1000,8 +1003,8 @@ class Harmony_Transformer(object):
                                     1
                                 ].tolist()
                                 valid_results_dict["chord_change_predictions"] = valid_cc_pred.tolist()
-                                print(f"saving validation results to {root_dir}")
-                                with open(f"valid_results_{step}.json", "w") as f:
+                                print(f"saving validation results for step {step} indices {start_id_} - {end_id_} to {root_dir}")
+                                with open(f"valid_results_{step}_{start_id_}-{end_id_}.json", "w") as f:
                                     json.dump(valid_results_dict, f)
 
 
